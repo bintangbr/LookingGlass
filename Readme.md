@@ -15,7 +15,7 @@ Looking Glass adalah alat berbasis web yang memungkinkan Anda untuk menguji kone
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## 🛠️ bahasa dan tool yang Digunakan
 
 - **PHP**: Logika backend untuk menjalankan perintah jaringan dengan keamanan dasar.
 - **HTML, CSS, Bootstrap**: Membuat antarmuka pengguna yang responsif dan modern.
@@ -24,18 +24,18 @@ Looking Glass adalah alat berbasis web yang memungkinkan Anda untuk menguji kone
 
 ---
 
-## 📋 Instalasi
+## 📋 Install
 
 Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi ini di server lokal atau hosting, disarankan menggunakan server sendiri atau VPS.
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/bintangbr/looking-glass.git
+git clone https://github.com/bintangbr/LookingGlass.git
 ```
 
 ### 2. Masuk ke Direktori Proyek
 ```bash
-cd looking-glass
+cd LookingGlass
 ```
 
 ### 3. Konfigurasi
