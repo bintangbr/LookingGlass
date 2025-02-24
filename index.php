@@ -33,7 +33,8 @@ function executeCommand($command, $parameter, $protocol) {
         return "Terjadi kesalahan saat menjalankan perintah.";
     }
 
-    return nl2br(htmlspecialchars($output));
+    // Hapus nl2br() dan cukup gunakan htmlspecialchars()
+    return htmlspecialchars($output);
 }
 
 $result = '';
@@ -75,86 +76,83 @@ $ipInfo = getClientIPInfo();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Looking Glass - Linkbit Inovasi Teknologi</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://linkbit.net.id/assets/img/favicon.ico" rel="icon">
     <meta name="author" content="https://github.com/bintangbr" />
 </head>
-<body>
-<div class="container mt-5">
-    <div class="text-center mb-4">
-        <h1><i class="fas fa-network-wired"></i> Looking Glass - Network Tools</h1>
-        <p class="text-muted">Tes koneksi jaringan dengan mudah menggunakan Ping atau Traceroute.</p>
+<body class="bg-gray-100">
+<div class="container mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+        <img src="https://dashboard-staging.linkbit.net.id/assets/image/logo.png" alt="Logo" class="mx-auto h-20 mb-4">
+        <h1 class="text-3xl font-bold text-gray-800"><i class="fas fa-network-wired"></i> Looking Glass - Network Tools</h1>
+        <p class="text-gray-600">Tes koneksi jaringan dengan mudah menggunakan Ping atau Traceroute.</p>
     </div>
 
-    <div class="card shadow-lg mb-4">
-        <div class="card-body">
-            <h3 class="text-center mb-3">Network Information</h3>
-            <ul class="list-unstyled">
-                <li><strong>Server Location:</strong> Purwodadi, Central Java, Indonesia</li>
-                <li><strong>Test IPv4:</strong> 103.190.112.100</li>
-                <li><strong>Test IPv6:</strong> 2001:df08::</li>
-                <li><strong>Test Files:</strong> 
-                    <a href="100MB.test">100MB</a>, 
-                    <a href="1000MB.test">1000MB</a>
-                </li>
-                <li>
-                    <strong>Your IP Address:</strong> 
-                    <?= htmlspecialchars($ipInfo['ip']) ?> 
-                    (<em><?= htmlspecialchars($ipInfo['owner']) ?></em>)
-                </li>
-            </ul>
-        </div>
+    <div class="bg-white shadow-lg rounded-lg mb-8 p-6">
+        <h3 class="text-center text-2xl font-semibold mb-4">Network Information</h3>
+        <ul class="space-y-2">
+            <li><strong>Server Location:</strong> Purwodadi, Central Java, Indonesia</li>
+            <li><strong>Test IPv4:</strong> 103.190.112.100</li>
+            <li><strong>Test IPv6:</strong> 2001:df08::</li>
+            <li><strong>Test Files:</strong> 
+                <a href="100MB.test" class="text-blue-500 hover:underline">100MB</a>, 
+                <a href="1000MB.test" class="text-blue-500 hover:underline">1000MB</a>
+            </li>
+            <li>
+                <strong>Your IP Address:</strong> 
+                <?= htmlspecialchars($ipInfo['ip']) ?> 
+                (<em><?= htmlspecialchars($ipInfo['owner']) ?></em>)
+            </li>
+        </ul>
     </div>
 
-    <div class="card shadow-lg">
-        <div class="card-body">
-            <h3 class="text-center mb-3">Network Tests</h3>
-            <form method="POST" class="needs-validation" novalidate>
-                <div class="mb-3">
-                    <label for="command" class="form-label">Pilih Perintah</label>
-                    <select class="form-select" name="command" id="command" required>
-                        <option value="ping">Ping</option>
-                        <option value="traceroute">Traceroute</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="protocol" class="form-label">Pilih Protokol</label>
-                    <select class="form-select" name="protocol" id="protocol" required>
-                        <option value="">Pilih Protokol</option>
-                        <option value="ipv4">IPv4</option>
-                        <option value="ipv6">IPv6</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="parameter" class="form-label">Masukkan IP atau Hostname</label>
-                    <input type="text" class="form-control" id="parameter" name="parameter" placeholder="Contoh: 8.8.8.8" required>
-                    <div class="invalid-feedback">Masukkan alamat IP atau hostname yang valid.</div>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-play-circle"></i> Jalankan</button>
-                </div>
-            </form>
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-center text-2xl font-semibold mb-4">Network Tests</h3>
+        <form method="POST" class="space-y-4">
+            <div>
+                <label for="command" class="block text-sm font-medium text-gray-700">Pilih Perintah</label>
+                <select class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" name="command" id="command" required>
+                    <option value="ping">Ping</option>
+                    <option value="traceroute">Traceroute</option>
+                </select>
+            </div>
+            <div>
+                <label for="protocol" class="block text-sm font-medium text-gray-700">Pilih Protokol</label>
+                <select class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" name="protocol" id="protocol" required>
+                    <option value="">Pilih Protokol</option>
+                    <option value="ipv4">IPv4</option>
+                    <option value="ipv6">IPv6</option>
+                </select>
+            </div>
+            <div>
+                <label for="parameter" class="block text-sm font-medium text-gray-700">Masukkan IP atau Hostname</label>
+                <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm" id="parameter" name="parameter" placeholder="Contoh: 8.8.8.8" required>
+                <div class="text-sm text-red-600">Masukkan alamat IP atau hostname yang valid.</div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"><i class="fas fa-play-circle"></i> Jalankan</button>
+            </div>
+        </form>
 
-            <?php if (!empty($result)): ?>
-                <div class="mt-4">
-                    <h3 class="text-center">Hasil:</h3>
-                    <pre class="bg-light p-3 border"> <?= htmlspecialchars($result) ?> </pre>
-                </div>
-            <?php endif; ?>
-        </div>
+        <?php if (!empty($result)): ?>
+            <div class="mt-6">
+                <h3 class="text-center text-2xl font-semibold mb-4">Hasil:</h3>
+                <pre class="bg-gray-100 p-4 rounded-md border border-gray-200"> <?= htmlspecialchars($result) ?> </pre>
+            </div>
+        <?php endif; ?>
     </div>
 
-    <footer class="text-center mt-4">
-        <p>&copy; 2022-2025 NOC Linkbit Inovasi Teknologi</p>
-        <p>Develop by <a href="https://github.com/bintangbr">Bintanggg</a></p>
+    <footer class="text-center mt-8 text-gray-600">
+        <p>&copy; 2022-2025 developers.linkbit.net.id</p>
+        <p>Develop by <a href="https://github.com/bintangbr" class="text-blue-500 hover:underline">Bintanggg</a></p>
     </footer>
 </div>
 
 <script>
     (function () {
         'use strict'
-        var forms = document.querySelectorAll('.needs-validation')
+        var forms = document.querySelectorAll('form')
         Array.prototype.slice.call(forms).forEach(function (form) {
             form.addEventListener('submit', function (event) {
                 if (!form.checkValidity()) {
@@ -166,6 +164,5 @@ $ipInfo = getClientIPInfo();
         })
     })()
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
